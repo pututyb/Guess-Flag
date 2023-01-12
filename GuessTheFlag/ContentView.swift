@@ -62,7 +62,14 @@ func flagTapped(_ number: Int) {
             scoreTitle = "Wrong -10 that flag of \(countries[number].uppercased())"
             score -= 10
         }
+    if question == 8 {
+        scoreTitle = "Game Over! your final score\(score)"
+            .uppercased()
         showingScore = true
+    } else {
+        showingScore = true
+        question += 1
+    }
     }
     
     func askQuestion() {
