@@ -45,6 +45,7 @@ struct ContentView: View {
                             .renderingMode(.original)
                             .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
                             .shadow(radius: 5)
+                            .opacity(selectedFlag == -1 || selectedFlag == number ? 1.0 : 0.25)
                             .rotation3DEffect(.degrees(animationAmount), axis: (x: 0, y: 1, z: 0))
                     }
                 }
