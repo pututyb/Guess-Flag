@@ -13,6 +13,8 @@ struct ContentView: View {
     @State private var scoreTitle = ""
     @State private var score = 0
     @State private var question = 8
+    @State private var selectedFlag = -1
+    @State private var animationAmount = 0.0
     
     @State private var countries = ["estonia", "france", "germany", "ireland", "italy", "monaco", "nigeria", "poland", "russia", "spain", "uk", "us"].shuffled()
     @State private var correctAnswer = Int.random(in: 0...2)
@@ -35,11 +37,15 @@ struct ContentView: View {
                 ForEach(0..<3) {number in
                     Button {
                         flagTapped(number)
+                        withAnimation {
+                            animationAmount += 360
+                        }
                     } label: {
                         Image(countries[number])
                             .renderingMode(.original)
                             .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
                             .shadow(radius: 5)
+                            .rotation3DEffect(.degrees(animationAmount), axis: (x: 0, y: 1, z: 0))
                     }
                 }
                 Text("Score: \(score)")
@@ -70,11 +76,13 @@ func flagTapped(_ number: Int) {
         showingScore = true
         question += 1
     }
+    selectedFlag = number
     }
     
     func askQuestion() {
                 countries.shuffle()
                 correctAnswer = Int.random(in: 0...2)
+        selectedFlag = -1
         }
 }
 
